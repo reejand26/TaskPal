@@ -1,3 +1,5 @@
+
+<!--updated clean version-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,96 +19,66 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css"/>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans dark:bg-gray-900 dark:text-gray-100 transition">
+<body class="bg-gray-100 text-gray-800 font-sans transition">
 
-  <header class="bg-white dark:bg-gray-800 shadow-md">
+  <!-- Navbar -->
+  <header class="bg-white shadow-md">
     <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">TaskPal</h1>
+      <h1 class="text-2xl font-bold text-indigo-600">TaskPal</h1>
       <ul class="flex space-x-6">
-        <li><a href="#tasks" class="text-gray-700 hover:text-indigo-600 dark:text-gray-200 dark:hover:text-indigo-400">Tasks</a></li>
-        <li><a href="#alarms" class="text-gray-700 hover:text-indigo-600 dark:text-gray-200 dark:hover:text-indigo-400">Alarms</a></li>
-        <li><a href="#about" class="text-gray-700 hover:text-indigo-600 dark:text-gray-200 dark:hover:text-indigo-400">About</a></li>
+        <li><a href="#tasks" class="text-gray-700 hover:text-indigo-600">Tasks</a></li>
+        <li><a href="#about" class="text-gray-700 hover:text-indigo-600">About</a></li>
       </ul>
-
-      <label class="flex items-center cursor-pointer ml-4">
-        <span class="text-sm text-gray-700 mr-2 dark:text-gray-300">🌞</span>
-        <input type="checkbox" id="darkToggle" class="hidden">
-        <div class="w-10 h-5 bg-gray-300 rounded-full shadow-inner relative">
-          <div class="dot absolute w-5 h-5 bg-white rounded-full shadow -left-1 -top-1 transition transform"></div>
-        </div>
-        <span class="text-sm text-gray-700 ml-2 dark:text-gray-300">🌚</span>
-      </label>
     </nav>
   </header>
 
-  <section class="bg-indigo-100 dark:bg-indigo-950 py-12 text-center">
-    <h2 class="text-3xl font-semibold text-indigo-800 dark:text-indigo-200">Your everyday companion to conquer tasks and never miss a moment.</h2>
+  <!-- Hero Section -->
+  <section class="bg-indigo-100 py-12 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-800">
+      Your everyday companion to conquer tasks and never miss a moment.
+    </h2>
+    <div class="mt-4 italic text-indigo-600 text-lg" id="quote"></div>
   </section>
 
+  <!-- Tasks Section -->
   <section id="tasks" class="max-w-3xl mx-auto mt-12 px-4">
-    <h3 class="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-300">My Tasks</h3>
-    <div class="flex gap-4 mb-6">
-      <input type="text" id="taskInput" placeholder="Add a new task.."
-             class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 dark:text-white">
-      <button onclick="addTask()" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">Add</button>
+    <h3 class="text-2xl font-bold mb-4 text-indigo-700">My Tasks</h3>
+    <div class="flex flex-col md:flex-row gap-4 mb-4">
+      <input type="text" id="taskInput" placeholder="Add a new task..."
+             class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white text-black">
+      <select id="taskCategory"
+              class="px-2 py-2 border border-gray-300 rounded-md bg-white text-black">
+        <option value="General">General</option>
+        <option value="Work">Work</option>
+        <option value="Study">Study</option>
+        <option value="Personal">Personal</option>
+      </select>
+      <input type="date" id="taskDueDate"
+             class="px-4 py-2 border border-gray-300 rounded-md bg-white text-black">
+      <button onclick="addTask()"
+              class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">Add</button>
     </div>
     <ul id="taskList" class="space-y-2"></ul>
   </section>
 
-  <hr class="my-16 border-gray-300 dark:border-gray-600 max-w-4xl mx-auto" />
+  <hr class="my-16 border-gray-300 max-w-4xl mx-auto" />
 
-  <section id="alarms" class="max-w-3xl mx-auto mt-12 px-4">
-    <h3 class="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-300">Set Alarms</h3>
-    <div class="flex flex-col md:flex-row gap-4 mb-6">
-      <input type="time" id="alarmTime"
-             class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 dark:text-white">
-      <input type="text" id="alarmLabel" placeholder="Alarm label"
-             class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 dark:text-white">
-      <button onclick="setAlarm()" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">Set Alarm</button>
-    </div>
-    <ul id="alarmList" class="space-y-2"></ul>
-  </section>
-
-  <hr class="my-16 border-gray-300 dark:border-gray-600 max-w-4xl mx-auto" />
-
-  <section id="about" class="bg-white dark:bg-gray-800 mt-16 py-12 px-4">
+  <!-- About -->
+  <section id="about" class="bg-white mt-16 py-12 px-4">
     <div class="max-w-3xl mx-auto text-center">
-      <h3 class="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-300">About TaskPal</h3>
-      <p class="text-gray-700 dark:text-gray-200 text-lg">
-        TaskPal is a simple and powerful web app designed to keep your daily life organized.
-        Whether you're a student, professional, or anyone trying to stay on track — TaskPal
-        helps you manage your tasks and set reminders in one place. It's your digital buddy
-        for boosting productivity and reducing forgetfulness.
+      <h3 class="text-2xl font-bold mb-4 text-indigo-700">About TaskPal</h3>
+      <p class="text-gray-700 text-lg">
+        TaskPal helps you organize your life with clarity. Add categorized tasks, keep track of due dates,
+        and stay motivated with fresh quotes every day. Keep it simple. Keep it done.
       </p>
     </div>
   </section>
 
-  <footer class="bg-gray-200 dark:bg-gray-800 py-4 text-center text-gray-600 dark:text-gray-400 mt-10">
+  <footer class="bg-gray-200 py-4 text-center text-gray-600 mt-10">
     &copy; 2025 TaskPal. All rights reserved.
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    const toggle = document.getElementById('darkToggle');
-    const body = document.body;
-    const dot = document.querySelector('.dot');
-    if (localStorage.getItem('darkMode') === 'true') {
-      body.classList.add('dark');
-      toggle.checked = true;
-      dot.classList.add('translate-x-full');
-    }
-    toggle.addEventListener('change', () => {
-      body.classList.toggle('dark');
-      const isDark = body.classList.contains('dark');
-      localStorage.setItem('darkMode', isDark);
-      if (isDark) {
-        dot.classList.add('translate-x-full');
-      } else {
-        dot.classList.remove('translate-x-full');
-      }
-    });
-  </script>
 </body>
 </html>
